@@ -289,7 +289,17 @@ public class RNNearbyApiModule extends ReactContextBaseJavaModule implements Lif
                                 emitEvent(RNNearbyApiEvent.SUBSCRIBE_SUCCESS, "Subscribe success. Is currently subscribing.");
                             } else {
                                 Log.e(getName(), "Subscribe failed");
-                                Log.e(getName(), status.getStatusMessage());
+								
+								String resp="";
+								if (status!=null) {
+									if (status.getStatusMessage()!=null) {
+										resp=status.getStatusMessage();
+									}
+									else resp="getStatusMessage is null";
+								}
+								else resp="status is null";
+								
+                                Log.e(getName(), resp);
                                 _isSubscribing = false;
                                 emitEvent(RNNearbyApiEvent.SUBSCRIBE_FAILED, "Subscribe failed: " + status.getStatusMessage());
                             }
